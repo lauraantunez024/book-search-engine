@@ -13,7 +13,12 @@ const server = new ApolloServer({
   context: authMiddleware
 });
 
-server.applyMiddleware({ app })
+const startApolloServer = async (typeDef, resolvers) => {
+  await server.start();
+  server.applyMiddleware({ app });
+}
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -27,10 +32,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'))
 });
 
-// const startApolloServer = async (typeDef, resolvers) => {
-//   await server.start();
-//   server.applyMiddleware({ app });
-// }
 
 
 db.once('open', () => {
