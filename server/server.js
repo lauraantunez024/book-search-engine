@@ -40,4 +40,4 @@ db.once('open', () => {
 
 });
 
-// startApolloServer(typeDefs, resolvers);
+startApolloServer(typeDefs, resolvers);
